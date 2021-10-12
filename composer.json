@@ -1,5 +1,5 @@
 {
-  "name": "yiisoft/yii2-redis",
+  "name": "pocifik/s3-filestorage",
   "description": "S3 File Storage for the Yii framework",
   "keywords": ["yii2", "s3", "aws"],
   "type": "yii2-extension",
