@@ -1,0 +1,26 @@
+{
+  "name": "yiisoft/yii2-redis",
+  "description": "S3 File Storage for the Yii framework",
+  "keywords": ["yii2", "s3", "aws"],
+  "type": "yii2-extension",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "pocifik",
+      "email": "pocific.i@gmail.com"
+    }
+  ],
+  "require": {
+    "yiisoft/yii2": "~2.0.39",
+    "aws/aws-sdk-php": "^3.133"
+  },
+  "autoload": {
+    "psr-4": { "yii\\redis\\": "src" }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
+}
