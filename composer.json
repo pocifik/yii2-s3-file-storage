@@ -15,7 +15,7 @@
     "aws/aws-sdk-php": "^3.133"
   },
   "autoload": {
-    "psr-4": { "yii\\redis\\": "src" }
+    "psr-4": { "pocifik\\filestorage\\": "src" }
   },
   "repositories": [
     {
