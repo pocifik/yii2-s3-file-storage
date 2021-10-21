@@ -7,6 +7,9 @@ use yii\helpers\FileHelper;
 
 class LocalFileStorage extends AbstractFileStorage
 {
+    public string $public_path;
+    public string $real_path;
+
     public function copyFile(string $source, string $dest)
     {
         return copy($source, $dest);
@@ -19,13 +22,12 @@ class LocalFileStorage extends AbstractFileStorage
 
     public function getPublicPath()
     {
-        $http = Yii::$app->request->isSecureConnection ? 'https' : 'http';
-        return $http . '://' . Yii::$app->params['urls']['frontend_api'];
+        return $this->public_path;
     }
 
     public function getRealPath()
     {
-        return Yii::getAlias('@frontend_api/web');
+        return $this->real_path;
     }
 
     public function isFileExists(string $path)

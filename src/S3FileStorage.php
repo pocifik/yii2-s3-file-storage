@@ -115,6 +115,15 @@ class S3FileStorage extends AbstractFileStorage
         return $tmp_filename;
     }
 
+    public function downloadS3File(string $path) : string
+    {
+        $result = $this->s3_client->getObject([
+            'Bucket' => $this->bucket,
+            'Key' => $path,
+        ]);
+        return (string)$result['Body'];
+    }
+
     public function clearTmpFiles()
     {
         if (empty($this->tmp_files)) {
