@@ -11,10 +11,11 @@ abstract class AbstractFileStorage extends Component
      *
      * @param string $source Путь к файлу
      * @param string $dest Новый путь к файлу
+     * @param bool $public Публичный ли файл
      *
      * @return bool
      */
-    public abstract function copyFile(string $source, string $dest);
+    public abstract function copyFile(string $source, string $dest, bool $public = true);
 
     /**
      * Удаляет файл

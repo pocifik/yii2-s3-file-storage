@@ -10,7 +10,7 @@ class LocalFileStorage extends AbstractFileStorage
     public string $public_path;
     public string $real_path;
 
-    public function copyFile(string $source, string $dest)
+    public function copyFile(string $source, string $dest, bool $public = true)
     {
         return copy($source, $dest);
     }
