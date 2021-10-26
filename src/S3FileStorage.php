@@ -41,15 +41,20 @@ class S3FileStorage extends AbstractFileStorage
         register_shutdown_function([$this, 'clearTmpFiles']);
     }
 
-    public function copyFile(string $source, string $dest)
+    public function copyFile(string $source, string $dest, bool $public = true)
     {
         //При копировании файлов, сохраняем их оригинальный путь на сервере, чтобы лишний раз не обращаться к S3
         $hash_s3 = md5($dest);
         $this->tmp_files_s3[$hash_s3] = $source;
 
+        $acl = 'private';
+        if ($public) {
+            $acl = 'public-read';
+        }
+
         return copy($source, $dest, stream_context_create([
             's3' => [
-                'ACL' => 'public-read'
+                'ACL' => $acl
             ]
         ]));
     }
