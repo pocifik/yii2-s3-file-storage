@@ -15,7 +15,7 @@ abstract class AbstractFileStorage extends Component
      *
      * @return bool
      */
-    public abstract function copyFile(string $source, string $dest, bool $public = true);
+    public abstract function copyFile(string $source, string $dest, bool $public = true): bool;
 
     /**
      * Удаляет файл
@@ -24,21 +24,21 @@ abstract class AbstractFileStorage extends Component
      *
      * @return bool
      */
-    public abstract function removeFile(string $path);
+    public abstract function removeFile(string $path): bool;
 
     /**
      * Возвращает url часть пути для публичного доступа к файлам
      *
      * @return string
      */
-    public abstract function getPublicPath();
+    public abstract function getPublicPath(): string;
 
     /**
      * Возвращает часть пути реального расположения файла, для работы с ним внутри системы
      *
      * @return string
      */
-    public abstract function getRealPath();
+    public abstract function getRealPath(): string;
 
     /**
      * Проверяет существует ли файл
@@ -47,16 +47,16 @@ abstract class AbstractFileStorage extends Component
      *
      * @return bool
      */
-    public abstract function isFileExists(string $path);
+    public abstract function isFileExists(string $path): bool;
 
     /**
      * Создает указанную директорию
      *
      * @param string $path
      *
-     * @return string
+     * @return bool
      */
-    public abstract function createDirectory(string $path);
+    public abstract function createDirectory(string $path): bool;
 
     /**
      * Возвращает путь к файлу на текущем сервере.
@@ -66,5 +66,14 @@ abstract class AbstractFileStorage extends Component
      *
      * @return string
      */
-    public abstract function getFileLocally(string $src);
+    public abstract function getFileLocally(string $src): string;
+
+    /**
+     * Возвращает содержимое файла
+     *
+     * @param string $path
+     *
+     * @return string
+     */
+    public abstract function getFileContent(string $path): string;
 }

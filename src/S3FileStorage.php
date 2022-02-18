@@ -41,7 +41,7 @@ class S3FileStorage extends AbstractFileStorage
         register_shutdown_function([$this, 'clearTmpFiles']);
     }
 
-    public function copyFile(string $source, string $dest, bool $public = true)
+    public function copyFile(string $source, string $dest, bool $public = true): bool
     {
         //При копировании файлов, сохраняем их оригинальный путь на сервере, чтобы лишний раз не обращаться к S3
         $hash_s3 = md5($dest);
@@ -59,33 +59,33 @@ class S3FileStorage extends AbstractFileStorage
         ]));
     }
 
-    public function removeFile(string $path)
+    public function removeFile(string $path): bool
     {
         return unlink($path);
     }
 
-    public function getPublicPath()
+    public function getPublicPath(): string
     {
         return "$this->url";
     }
 
-    public function getRealPath()
+    public function getRealPath(): string
     {
         return "{$this->prefix}{$this->bucket}";
     }
 
-    public function isFileExists(string $path)
+    public function isFileExists(string $path): bool
     {
         return file_exists($path);
     }
 
-    public function createDirectory(string $path)
+    public function createDirectory(string $path): bool
     {
         // Для S3 не нужно создавать директории вручную, это лишние запросы
         return true;
     }
 
-    public function getFileLocally(string $src)
+    public function getFileLocally(string $src): string
     {
         $hash = md5($src);
 
@@ -120,7 +120,7 @@ class S3FileStorage extends AbstractFileStorage
         return $tmp_filename;
     }
 
-    public function downloadS3File(string $path) : string
+    public function getFileContent(string $path): string
     {
         $result = $this->s3_client->getObject([
             'Bucket' => $this->bucket,
@@ -129,7 +129,7 @@ class S3FileStorage extends AbstractFileStorage
         return (string)$result['Body'];
     }
 
-    public function clearTmpFiles()
+    public function clearTmpFiles(): bool
     {
         if (empty($this->tmp_files)) {
             return true;
